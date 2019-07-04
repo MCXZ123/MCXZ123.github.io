@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta name="author" content="Austin Zeng">
+  
+  
+  <title>Coding Demonstration | Austin Zeng&#39;s blog</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content>
+  
+
+  
+  <meta name="description" content="Austin Zeng&#39;s blog">
+
+  
+
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":false,"count":false},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2019-07-01",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "Austin Zeng",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">Austin Zeng</a>
+      </span>
+    
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">Home</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/dongyuanxin/" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            Home
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2019-07-01
+    </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    Coding Demonstration
+  </h1>
+  
+  <article class="passage-article">
+    <h2 id="Data-cleaning-example"><a href="#Data-cleaning-example" class="headerlink" title="Data cleaning example:"></a>Data cleaning example:</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">data = pd.read_excel(<span class="string">"Credit Card Payment Fraud.xlsx"</span>)</span><br><span class="line">print(data.head(<span class="number">20</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># "merchnum" Missing Value Imputation First Round:</span></span><br><span class="line"><span class="comment">## Replace the missing "merchnum" with non-missing "merchnum" based on same "merch.zip", "merch.state", "merch.description"</span></span><br><span class="line"></span><br><span class="line">print(data[[<span class="string">"merchnum"</span>]].isnull().sum())</span><br><span class="line">data[<span class="string">"merchnum"</span>]=data[<span class="string">"merchnum"</span>].astype(<span class="string">'category'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">## non-missing "merchnum" dictionary</span></span><br><span class="line">merchnum=data.loc[(data[<span class="string">"merchnum"</span>].notnull())&amp;(data[<span class="string">"merch.description"</span>].notnull())&amp;(data[<span class="string">"merch.state"</span>].notnull())&amp;(data[<span class="string">"merch.zip"</span>].notnull()),</span><br><span class="line">                  [<span class="string">"merchnum"</span>,<span class="string">"merch.description"</span>,<span class="string">"merch.state"</span>,<span class="string">"merch.zip"</span>]].drop_duplicates()</span><br><span class="line"></span><br><span class="line"><span class="comment">## split data into missing "merchnum" and nonmissing "merchnum"</span></span><br><span class="line">merchnum_miss = data.loc[data[<span class="string">"merchnum"</span>].isnull(),]</span><br><span class="line">merchnum_nomiss = data.loc[data[<span class="string">"merchnum"</span>].notnull(),]</span><br><span class="line"></span><br><span class="line"><span class="comment">## replace missing "merchnum" based on non-missing "merchnum" dictionary</span></span><br><span class="line">merchnum_miss_fix = pd.merge(merchnum,merchnum_miss,how=<span class="string">'right'</span>,</span><br><span class="line">                         left_on=[<span class="string">"merch.description"</span>,<span class="string">"merch.state"</span>,<span class="string">"merch.zip"</span>],</span><br><span class="line">                         right_on=[<span class="string">"merch.description"</span>,<span class="string">"merch.state"</span>,<span class="string">"merch.zip"</span>])</span><br><span class="line"></span><br><span class="line">print(merchnum_miss_fix.columns)</span><br><span class="line"></span><br><span class="line"><span class="comment"># select and rename replaced "merchnum"</span></span><br><span class="line">merchnum_miss_fix=merchnum_miss_fix.loc[:,[<span class="string">"recordnum"</span>,<span class="string">"cardnum"</span>,<span class="string">"date"</span>,<span class="string">"merch.description"</span>,</span><br><span class="line">                                           <span class="string">"merch.state"</span>,<span class="string">"merch.zip"</span>,<span class="string">"transtype"</span>,<span class="string">"amount"</span>,<span class="string">"fraud"</span>,<span class="string">"merchnum_x"</span>]]</span><br><span class="line">merchnum_miss_fix.rename(columns=&#123;<span class="string">'merchnum_x'</span>:<span class="string">'merchnum'</span>&#125;, inplace=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># combine replaced missing "merchnum" and nonmissing "merchnum"</span></span><br><span class="line">data=pd.concat([merchnum_nomiss,merchnum_miss_fix],sort=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># quality check</span></span><br><span class="line">print(data[<span class="string">"merchnum"</span>].isnull().sum())</span><br><span class="line">print(data.columns)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Fraud-Analysis-example"><a href="#Fraud-Analysis-example" class="headerlink" title="Fraud Analysis example:"></a>Fraud Analysis example:</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">data = pd.read_excel(<span class="string">"Credit Card Payment Fraud Clean.xlsx"</span>)</span><br><span class="line">data[[<span class="string">"recordnum"</span>]] = data[[<span class="string">"recordnum"</span>]].astype(<span class="string">'category'</span>)</span><br><span class="line">data[[<span class="string">"cardnum"</span>]] = data[[<span class="string">"cardnum"</span>]].astype(<span class="string">'category'</span>)</span><br><span class="line">data[[<span class="string">"date"</span>]] = data[[<span class="string">"date"</span>]].astype(<span class="string">'datetime64[ns]'</span>)</span><br><span class="line">data[[<span class="string">"merchnum"</span>]] = data[[<span class="string">"merchnum"</span>]].astype(<span class="string">'category'</span>)</span><br><span class="line">data[[<span class="string">"merch.description"</span>]] = data[[<span class="string">"merch.description"</span>]].astype(<span class="string">'str'</span>)</span><br><span class="line">data[[<span class="string">"merch.state"</span>]] = data[[<span class="string">"merch.state"</span>]].astype(<span class="string">'category'</span>)</span><br><span class="line">data[[<span class="string">"merch.zip"</span>]] = data[[<span class="string">"merch.zip"</span>]].astype(<span class="string">'category'</span>)</span><br><span class="line">data[[<span class="string">"transtype"</span>]] = data[[<span class="string">"transtype"</span>]].astype(<span class="string">'category'</span>)</span><br><span class="line">data[[<span class="string">"amount"</span>]] = data[[<span class="string">"amount"</span>]].astype(<span class="string">'float'</span>)</span><br><span class="line">data[[<span class="string">"fraud"</span>]] = data[[<span class="string">"fraud"</span>]].astype(<span class="string">'category'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Type I: unusual transaction frequency at both card and merchant level</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Build_A_Var</span><span class="params">(df,time_window,key)</span>:</span></span><br><span class="line">    </span><br><span class="line">    df[<span class="string">"record"</span>]=<span class="number">1</span></span><br><span class="line">    df[key+<span class="string">"_"</span>+<span class="string">"frequency_"</span>+str(time_window)]=<span class="number">1</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(df.shape[<span class="number">0</span>]):</span><br><span class="line">        current_date = df.loc[df.index == i, <span class="string">"date"</span>].values[<span class="number">0</span>]</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> key ==<span class="string">"card"</span>:</span><br><span class="line">            current_key = df.loc[df.index==i,<span class="string">"cardnum"</span>].values[<span class="number">0</span>]</span><br><span class="line">            subset=df.loc[(df[<span class="string">"cardnum"</span>]==current_key) &amp; (df[<span class="string">"date"</span>]&lt;=current_date) \</span><br><span class="line">                             &amp; (df[<span class="string">"date"</span>]&gt;=current_date-pd.Timedelta(days=time_window)) \</span><br><span class="line">                             ,[<span class="string">"cardnum"</span>,<span class="string">"record"</span>]]</span><br><span class="line">            </span><br><span class="line">            run_frequency = subset[<span class="string">"record"</span>].sum()</span><br><span class="line">            </span><br><span class="line">            df.loc[df.index==i,key+<span class="string">"_"</span>+<span class="string">"frequency_"</span>+str(time_window)] = run_frequency</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">elif</span> key ==<span class="string">"merchant"</span>:</span><br><span class="line">            current_key = df.loc[df.index==i,<span class="string">"merchnum"</span>].values[<span class="number">0</span>]</span><br><span class="line">            subset=df.loc[(df[<span class="string">"merchnum"</span>]==current_key) &amp; (df[<span class="string">"date"</span>]&lt;=current_date) \</span><br><span class="line">                             &amp; (df[<span class="string">"date"</span>]&gt;=current_date-pd.Timedelta(days=time_window)) \</span><br><span class="line">                             ,[<span class="string">"merchnum"</span>,<span class="string">"record"</span>]]</span><br><span class="line">            </span><br><span class="line">            run_frequency = subset[<span class="string">"record"</span>].sum()</span><br><span class="line">            </span><br><span class="line">            df.loc[df.index==i,key+<span class="string">"_"</span>+<span class="string">"frequency_"</span>+str(time_window)] = run_frequency</span><br><span class="line">    </span><br><span class="line">        </span><br><span class="line">    <span class="keyword">del</span> df[<span class="string">"record"</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> df</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">data_test = Build_A_Var(data_test,<span class="number">3</span>,<span class="string">"card"</span>)</span><br><span class="line"></span><br><span class="line">print(data_test)</span><br></pre></td></tr></table></figure>
+
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Data-cleaning-example"><span class="toc-text">Data cleaning example:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Fraud-Analysis-example"><span class="toc-text">Fraud Analysis example:</span></a></li></ol>
+  </div>
+</aside>
+  
+  
+</div>
+
+    </main>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <div class="site-layer-input-choose">
+          <a href="javascript:void(0);" title="Change Search Engine">Google</a>
+        </div>
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      
+        <div class="site-layer-reward" id="site-layer-reward" style="display: none;">
+          
+            <div>
+              <img src="/images/wechat.png" alt="WeChat">
+              
+                <p>WeChat</p>
+              
+            </div>
+          
+            <div>
+              <img src="/images/alipay.png" alt="AliPay">
+              
+                <p>AliPay</p>
+              
+            </div>
+          
+        </div>
+      
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/2019/07/01/Project-Summary/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="javascript:void(0);" data-enable="false">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    
+      <a href="javascript:void(0);" id="site-reward">
+        <i class="fa fa-thumbs-up"></i>
+      </a>
+    
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+  
+  
+  
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
+</html>
